@@ -1,62 +1,83 @@
-import java.util.Scanner;
+/*
+Készítette: Más
+Refaktorálta: Erős István, 2026-11-18, II-N
+Forkolva: rearea projektből https://github.com/oktat/rearea
+*/
 
 public class ShapesArea {
-    public void triangle() {
-        Scanner scanner = new Scanner(System.in);
+    public void startTriangle() {
         System.out.println("Háromszög területe");
-        System.out.print("Alap: ");
-        String baseStr = scanner.nextLine();
-        System.out.print("Magasság: ");
-        String heightStr = scanner.nextLine();
-        Triangle triangle = new Triangle();
-        boolean good = true;
-        good = triangle.isGoodInput(baseStr);
-        good = triangle.isGoodInput(heightStr);
-        if (good) {
-            triangle.base = Double.parseDouble(baseStr);
-            triangle.height = Double.parseDouble(heightStr);
-            triangle.calcArea();
-            String format = "Háromszög területe: %f\n";
-            System.out.printf(format, triangle.getArea());
-        }
 
-        // scanner.close();
+        String baseStr = Console.input("Alap: ");
+        String heightStr = Console.input("Magasság: ");
+    
+        if (validateTriangle(baseStr, heightStr)) {
+            startTriangleCalc(baseStr, heightStr);
+        }
     }
-    public void circle() {
-        Scanner scanner = new Scanner(System.in);
+
+    private boolean validateTriangle(String baseStr, String heightStr) {
+        boolean validTriangle = true;
+        validTriangle = Validator.isValidInput(baseStr);
+        validTriangle = Validator.isValidInput(heightStr);
+        return validTriangle;
+    }
+
+    private void startTriangleCalc(String baseStr, String heightStr) {
+        Triangle triangle = new Triangle();
+        triangle.base = Double.parseDouble(baseStr);
+        triangle.height = Double.parseDouble(heightStr);
+        triangle.calcArea();
+        String format = "Háromszög területe: %f\n";
+        System.out.printf(format, triangle.getArea());
+    }
+
+    public void startCircle() {
         System.out.println("Kör területe");
-        System.out.print("Sugár: ");
-        String radiusStr = scanner.nextLine();
-        Circle circle = new Circle();
-        boolean good = true;
-        good = circle.isGoodInput(radiusStr);
-        if (good) {
+
+        String radiusStr = Console.input("Sugár: ");
+
+        if (validatorCircle(radiusStr)) {
+            startCircleCalc(radiusStr);
+        }
+    }
+
+    private boolean validatorCircle(String radiusStr){
+        boolean validCircle = true;
+        validCircle = Validator.isValidInput(radiusStr);
+        return validCircle;
+    }
+
+    private void startCircleCalc(String radiusStr){
+            Circle circle = new Circle();
             circle.radius = Double.parseDouble(radiusStr);
             circle.calcArea();
             String format = "Kör területe: %f\n";
             System.out.printf(format, circle.getArea());
-        }
-        // scanner.close();
     }
-    public void rectangle() {
-        Scanner scanner = new Scanner(System.in);
+
+    public void startRectangle() {
         System.out.println("Téglalap területe");
-        System.out.print("a oldal: ");
-        String aSideStr = scanner.nextLine();
-        System.out.print("b oldal: ");
-        String bSideStr = scanner.nextLine();
-        Rectangle rectangle = new Rectangle();
-        boolean good = true;
-        good = rectangle.isGoodInput(aSideStr);
-        good = rectangle.isGoodInput(bSideStr);
-        if (good) {
+
+        String aSideStr = Console.input("a oldal: ");
+        String bSideStr = Console.input("b oldal: ");
+
+        if (validatorRectangle(aSideStr, bSideStr)) {
+            startRectangleCalc(aSideStr, bSideStr);
+        }
+    }
+    private boolean validatorRectangle(String aSideStr, String bSideStr){
+        boolean validRectangle = true;
+        validRectangle = Validator.isValidInput(aSideStr);
+        validRectangle = Validator.isValidInput(bSideStr);
+        return validRectangle;
+    }
+    private void startRectangleCalc(String aSideStr, String bSideStr){
+          Rectangle rectangle = new Rectangle();
             rectangle.aSide = Double.parseDouble(aSideStr);
             rectangle.bSide = Double.parseDouble(bSideStr);
             rectangle.calcArea();
             String format = "Téglalap területe: %f\n";
             System.out.printf(format, rectangle.getArea());
-        }
-
-        // scanner.close();        
-    }
+    }    
 }

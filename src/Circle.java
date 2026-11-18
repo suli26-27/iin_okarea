@@ -1,3 +1,9 @@
+/*
+Készítette: Más
+Refaktorálta: Erős István, 2026-11-18, II-N
+Forkolva: rearea projektből https://github.com/oktat/rearea
+*/
+
 public class Circle implements Shape {
     double radius;
     Double area;
@@ -6,19 +12,5 @@ public class Circle implements Shape {
     }    
     public Double getArea() {
         return this.area;
-    }
-    public boolean isGoodInput(String input) {
-        boolean good = true;
-        String sample = "[0-9]+";
-        boolean isGoodSample = input.matches(sample);
-        if (isGoodSample) {
-            Double num = Double.parseDouble(input);
-            if ( num <= 0) {
-                good = false;
-            }
-        }else {
-            good = false;
-        }
-        return good;
     }
 }
